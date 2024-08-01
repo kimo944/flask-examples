@@ -24,11 +24,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m venv venv
-          # Activate virtual environment using a compatible shell command
-          . venv/bin/activate
-          # Verify that activation worked
+          # Activate virtual environment
+          source ./venv/bin/activate
+          # Check if Python is correctly using the virtual environment
+          python --version
           which python
           pip install -r requirements.txt
+        shell: bash
 
   test:
     runs-on: ubuntu-latest
@@ -46,15 +48,19 @@ jobs:
       - name: Install dependencies
         run: |
           python -m venv venv
-          . venv/bin/activate
+          source ./venv/bin/activate
+          python --version
           which python
           pip install -r requirements.txt
+        shell: bash
 
       - name: Run tests
         run: |
-          . venv/bin/activate
+          source ./venv/bin/activate
+          python --version
           which python
           pytest
+        shell: bash
 
   dockerize:
     runs-on: ubuntu-latest
@@ -68,6 +74,7 @@ jobs:
         run: |
           docker build -t flask-app .
           docker-compose up -d
+        shell: bash
 
   deploy:
     runs-on: ubuntu-latest
