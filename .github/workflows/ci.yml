@@ -24,12 +24,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m venv venv
-          # Activate virtual environment
           source ./venv/bin/activate
-          # Check if Python is correctly using the virtual environment
           python --version
           which python
           pip install -r requirements.txt
+          # Ensure pytest is installed
+          pip install pytest
+          # Check if pytest is available
+          pytest --version
         shell: bash
 
   test:
@@ -52,6 +54,8 @@ jobs:
           python --version
           which python
           pip install -r requirements.txt
+          pip install pytest
+          pytest --version
         shell: bash
 
       - name: Run tests
