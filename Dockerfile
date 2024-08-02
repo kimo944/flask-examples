@@ -1,12 +1,10 @@
-# Dockerfile
-
 FROM python:3.8-slim
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-
 COPY . .
 
-CMD ["python", "app.py"]
+RUN python -m venv venv
+RUN . venv/bin/activate && pip install -r requirements.txt
+
+CMD [".", "venv/bin/activate", "&&", "flask", "run", "--host=0.0.0.0"]
