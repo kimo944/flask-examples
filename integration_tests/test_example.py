@@ -1,7 +1,7 @@
 # integration_tests/test_example.py
 
 import pytest
-from app import app  # Adjust the import based on your app's structure
+from hello.app import app  # Adjust import based on actual path
 
 @pytest.fixture
 def client():
